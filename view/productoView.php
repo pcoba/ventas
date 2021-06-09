@@ -5,18 +5,35 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
-    <script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
-    <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-    <title>Pais</title>
+    <script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="http://cdn.datatables.net/1.10.2/js/jquery.dataTables.min.js"></script>
+    <script src="js/table.js"></script>
+    <title>Productos</title>
 </head>
 <body>
     <div class="container">
         <h1>Productos</h1> 
-        <div >
+        <div class="col-5">
         <form action="#" id="form1" method="POST">
             Id: <input class="form-control" type="text" name="id" id="id" readonly>
+            Código: <input class="form-control" type="text" name="codigo" id="codigo">
             Nombre: <input class="form-control" type="text" name="nombre" id="nombre" required>
-            Anio: <input class="form-control" type="text" name="anio" id="anio" required>
+            Descripcion: <input class="form-control" type="text" name="descripcion" id="descripcion">
+            Precio: <input class="form-control" type="text" name="precio" id="precio">
+            Stock: <input class="form-control" type="text" name="stock" id="stock">
+            Imagen: <input class="form-control" type="file" name="imagen" id="imagen">
+            Estado: <input type="radio" id="estado_activo" name="estado" value="activo">
+            <label for="activo">Activo</label>
+            <input type="radio" id="estado_inactivo" name="estado" value="inactivo">
+            <label for="inactivo">Inactivo</label><br>
+            <label for="tipo">Seleccione un tipo:</label>
+            <select name="tipo" id="tipo">
+            <option value="1">Laptop</option>
+            <option value="2">Accesorios</option>
+            <option value="3">USB</option>
+            <option value="4">PAN</option>
+            </select>
+            <hr>
             <input type="reset" class="btn btn-primary" value="Nuevo" 
             onclick="$('#g').attr('disabled',false)">
             <input type="submit" value="Guardar" id="g" name="insertar" class="btn btn-primary"
@@ -24,14 +41,16 @@
             <input type="submit" value="Modificar" id="actualizar" name="actualizar" class="btn btn-warning">
             <input type="submit" value="Eliminar" id="borrar" name="borrar" class="btn btn-danger" onclick="return confirmation()">
         </form>
-        <table class="table table-dark">
+        <hr>
+        <table id="tabla" class="paginated">
             <tr>
             <th>Id</th>
             <th>Nombre</th>
             <th>Precio</th>
             <th>Accion</th>
             </tr>
-            <?php
+            <?php $num_rows = count($datos);
+                echo "<h1> Numero de filas: ".$num_rows;
                 foreach($datos as $d){
                     $id= $d['idproducto'];
                     $nombre = str_replace(" ","&nbsp;",$d['nombre']);

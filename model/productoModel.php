@@ -1,6 +1,6 @@
 <?php
 require_once 'modelBD.php';
-require 'producto.php';
+require_once 'producto.php';
 
 class  productoModel
 {
@@ -15,16 +15,16 @@ class  productoModel
         }
        
     }
-    public function insertarProducto( producto $p)
+    public function insertarProducto( Producto $p)
     {
         try{
             $bd = new DB();
-            $nombre=$p->getNombre();
+            $nombre = $p->getNombre();
             $precio = $p->getPrecio();
             $precio = $p->getStock();
             $precio = $p->getImagen();
             $sql = "insert into  producto (nombre,precio, stock, imagen) values('$nombre','$precio')";
-            $res=$bd->insert($sql);
+            $res=$bd->sentencia($sql);
             return $res;
         }catch(Exception $ex){
             echo $ex;
@@ -41,7 +41,7 @@ class  productoModel
             $precio = $p->getStock();
             $precio = $p->getImagen();
             $sql= "update  producto set nombre = '$nombre', precio =  $precio where id producto = $id";
-            $res=$bd->insert($sql);
+            $res=$bd->sentencia($sql);
         }catch(Exception $ex){
             echo "<script> console.log('$ex'); </script>";
         }
@@ -53,8 +53,8 @@ class  productoModel
             $bd = new DB();
             $id = $p->getId();
             $sql = "delete from producto where idproducto = $id";
-            echo "<script> console.log(' producto a eliminar: $sql'); </script>";
-            $res=$bd->insert($sql);
+            //echo "<script> console.log(' producto a eliminar: $sql'); </script>";
+            $res=$bd->sentencia($sql);
         }catch(Exception $ex){
             echo "<script> console.log('$ex'); </script>";
         }

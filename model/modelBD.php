@@ -36,8 +36,8 @@ class DB {
       return false;
     }
   }
-
-  function insert($sql){
+// (C) RUN A SENTENCE
+  function sentencia($sql){
     $result = false;
     try {
       $this->stmt = $this->pdo->prepare($sql);

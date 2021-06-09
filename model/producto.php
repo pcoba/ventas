@@ -11,6 +11,9 @@ class Producto{
     {
         $this->id=$id;
         $this->nombre=$nombre;
+        $this->precio= $precio;
+        $this->stock= $stock;
+        $this->imagen= $imagen;
     }
 
     public function getId(){
